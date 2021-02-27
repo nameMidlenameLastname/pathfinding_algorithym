@@ -5,10 +5,22 @@ const int Y = 10;
 const int X = 20;
 
 // definindo grid
-int grid[Y][X];
+char grid[Y][X];
 
+// põe os valores no grid
+void set_grid(char grid[Y][X])
+{
+    for (int y = 0; y < 12; y++)
+    {
+
+        for (int x = 0; x < 20; x++)
+        {
+            grid[y][x] = 'o';
+        }
+    }
+}
 // imprime o grid
-void print_grid(int grid[Y][X])
+void print_grid(char grid[Y][X])
 {
     for (int y = 0; y < 12; y++)
     {
@@ -16,24 +28,24 @@ void print_grid(int grid[Y][X])
         {
             if (y == 0 && z == 0)
             {
-                cout << "        ";
+                cout << "       ";
             }
 
             if (y == 1)
             {
                 if (z > 9)
                 {
-                    cout << z << "  ";
+                    cout << z << " ";
                 }
                 else
                 {
-                    cout << z << "   ";
+                    cout << z << "  ";
                 }
             }
             if (y == 1 && z == 19)
             {
                 cout << "\n";
-                cout << "        ==============================================================================";
+                cout << "       ===========================================================";
             }
         }
 
@@ -45,7 +57,7 @@ void print_grid(int grid[Y][X])
 
             for (int x = 0; x < 20; x++)
             {
-                cout << "   " << grid[w][x];
+                cout << "  " << grid[w][x];
             }
         }
     }
@@ -54,6 +66,7 @@ void print_grid(int grid[Y][X])
 
 int main()
 {
+    set_grid(grid);
     print_grid(grid);
     system("PAUSE");
 }
