@@ -6,6 +6,8 @@ using namespace std;
 const int Y = 10;
 const int X = 20;
 
+int sr, sc, er, ec;
+
 char grid[10][20];
 
 //imprime o grid
@@ -37,7 +39,7 @@ void fill_grid(char grid[10][20])
 void set_grid(char grid[10][20])
 {
     print_grid(grid);
-    int sr, sc, er, ec;
+
     cout << "\nfileira do ponto inicial: ";
     cin >> sr;
     cout << "\ncoluna do ponto inicial: ";
@@ -65,9 +67,59 @@ void set_grid(char grid[10][20])
     } while (sr == er && sc == ec);
 }
 
+// encontrar o ponto final e definir uma area que se possa andar
 void walk_area(char grid[10][20])
 {
-    
+    int cr = sr, cc = sc;
+    char *current = &grid[cr][cc];
+    int count;
+    int repeats = 1;
+    do
+    {
+        cr++;
+        while (repeats != 0)
+        {
+            cr--;
+            cc--;
+            repeats--;
+            current = &grid[cr][cc];
+            *current = 'W';
+        }
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr--;
+            cc++;
+            repeats--;
+            current = &grid[cr][cc];
+            *current = 'W';
+        }
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr++;
+            cc++;
+            repeats--;
+            current = &grid[cr][cc];
+            *current = 'W';
+        }
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr++;
+            cc--;
+            repeats--;
+            current = &grid[cr][cc];
+            *current = 'W';
+        }
+        repeats = count;
+
+        count++;
+
+    } while (grid[cr][cc] != 'E');
 }
 
 int main()
@@ -75,4 +127,6 @@ int main()
     system("cls");
     fill_grid(grid);
     set_grid(grid);
+    walk_area(grid);
+    print_grid(grid);
 }
