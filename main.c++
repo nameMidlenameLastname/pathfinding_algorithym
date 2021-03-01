@@ -1,108 +1,78 @@
 #include <iostream>
 #include <unistd.h>
+#include <string>
 using namespace std;
-// dimensões do grid
+
 const int Y = 10;
 const int X = 20;
 
-// definindo grid
-char grid[Y][X];
-int sc;
-int sr;
-int ec;
-int er;
+char grid[10][20];
 
-// imprime o grid
-void print_grid(char grid[Y][X])
+//imprime o grid
+void print_grid(char grid[10][20])
 {
-    for (int y = 0; y < 12; y++)
+    for (int y = 0; y < Y; y++)
     {
-        for (int z = 0; z < 20; z++)
+        cout << "\n";
+        for (int x = 0; x < X; x++)
         {
-            if (y == 0 && z == 0)
-            {
-                cout << "       ";
-            }
-
-            if (y == 1)
-            {
-                if (z > 9)
-                {
-                    cout << z << " ";
-                }
-                else
-                {
-                    cout << z << "  ";
-                }
-            }
-            if (y == 1 && z == 19)
-            {
-                cout << "\n";
-                cout << "       ===========================================================";
-            }
-        }
-
-        if (y > 1)
-        {
-            int w = y - 2;
-            cout << "\n"
-                 << w << "  ||";
-
-            for (int x = 0; x < 20; x++)
-            {
-                cout << "  " << grid[w][x];
-            }
+            cout << grid[y][x] << ' ';
         }
     }
-    cout << "\n";
 }
 
 // põe os valores no grid
-void set_grid(char grid[Y][X])
+void fill_grid(char grid[10][20])
 {
-    for (int y = 0; y < 12; y++)
+    for (int y = 0; y < Y; y++)
     {
-
-        for (int x = 0; x < 20; x++)
+        for (int x = 0; x < X; x++)
         {
             grid[y][x] = 'o';
         }
     }
+}
+
+//põe o começo e o fim no grid
+void set_grid(char grid[10][20])
+{
     print_grid(grid);
-
-    cout << "\nwhich column for starting point?\n";
-    cin >> sc;
-
-    cout << "\nwhich row for starting point?\n";
+    int sr, sc, er, ec;
+    cout << "\nfileira do ponto inicial: ";
     cin >> sr;
-
-    grid[sr][sc] = 'S';
-
+    cout << "\ncoluna do ponto inicial: ";
+    cin >> sc;
+    grid[sr - 1][sc - 1] = 'S';
+    system("cls");
     print_grid(grid);
-
     do
     {
-        if (sc == ec && sr == er)
+        cout << "\nfileira do ponto final: ";
+        cin >> er;
+        cout << "\ncoluna do ponto final: ";
+        cin >> ec;
+        if (sr != er || sc != ec)
+        {
+            grid[er - 1][ec - 1] = 'E';
+        }
+        system("cls");
+        print_grid(grid);
+        if (sr == er && sc == ec)
         {
             cout << "\nsame spot try again\n";
             sleep(1);
-            print_grid(grid);
         }
-        cout << "\nwhich column for final point?\n";
-        cin >> ec;
+    } while (sr == er && sc == ec);
+}
 
-        cout << "\nwhich row for final point?\n";
-        cin >> er;
-        if (sc != ec || sr != er)
-        {
-            grid[er][ec] = 'E';
-        }
-    } while (sc == ec && sr == er);
-
-    print_grid(grid);
+void walk_area(char grid[10][20])
+{
+    
 }
 
 int main()
 {
+    system("cls");
+    fill_grid(grid);
     set_grid(grid);
 }
