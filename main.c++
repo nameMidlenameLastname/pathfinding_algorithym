@@ -74,52 +74,8 @@ void walk_area(char grid[10][20])
     char *current = &grid[cr][cc];
     int count;
     int repeats = 1;
-    do
-    {
-        cr++;
-        while (repeats != 0)
-        {
-            cr--;
-            cc--;
-            repeats--;
-            current = &grid[cr][cc];
-            *current = 'W';
-        }
-        repeats = count;
 
-        while (repeats != 0)
-        {
-            cr--;
-            cc++;
-            repeats--;
-            current = &grid[cr][cc];
-            *current = 'W';
-        }
-        repeats = count;
-
-        while (repeats != 0)
-        {
-            cr++;
-            cc++;
-            repeats--;
-            current = &grid[cr][cc];
-            *current = 'W';
-        }
-        repeats = count;
-
-        while (repeats != 0)
-        {
-            cr++;
-            cc--;
-            repeats--;
-            current = &grid[cr][cc];
-            *current = 'W';
-        }
-        repeats = count;
-
-        count++;
-
-    } while (grid[cr][cc] != 'E');
+    
 }
 
 int main()
