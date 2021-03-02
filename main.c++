@@ -44,7 +44,9 @@ void set_grid(char grid[10][20])
     cin >> sr;
     cout << "\ncoluna do ponto inicial: ";
     cin >> sc;
-    grid[sr - 1][sc - 1] = 'S';
+    sr--;
+    sc--;
+    grid[sr][sc] = 'S';
     system("cls");
     print_grid(grid);
     do
@@ -55,7 +57,9 @@ void set_grid(char grid[10][20])
         cin >> ec;
         if (sr != er || sc != ec)
         {
-            grid[er - 1][ec - 1] = 'E';
+            er--;
+            ec--;
+            grid[er][ec] = 'E';
         }
         system("cls");
         print_grid(grid);
@@ -74,8 +78,62 @@ void walk_area(char grid[10][20])
     char *current = &grid[cr][cc];
     int count = 1;
     int repeats;
-}
 
+    while (*current != 'E')
+    {
+        repeats = count;
+        cr--;
+        current = &grid[cr][cc];
+        *current = 'W';
+
+        while (repeats != 0)
+        {
+            cr++;
+            cc--;
+            current = &grid[cr][cc];
+            *current = 'W';
+            repeats--;
+        }
+
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr++;
+            cc++;
+            current = &grid[cr][cc];
+            *current = 'W';
+            repeats--;
+        }
+
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr--;
+            cc++;
+            current = &grid[cr][cc];
+            *current = 'W';
+            repeats--;
+        }
+
+        repeats = count;
+
+        while (repeats != 0)
+        {
+            cr--;
+            cc--;
+            current = &grid[cr][cc];
+            *current = 'W';
+            repeats--;
+        }
+
+        count++;
+        
+        print_grid(grid);
+        system("PAUSE");
+    }
+}
 int main()
 {
     system("cls");
