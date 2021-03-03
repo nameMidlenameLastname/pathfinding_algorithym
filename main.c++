@@ -84,52 +84,104 @@ void walk_area(char grid[10][20])
         repeats = count;
         cr--;
         current = &grid[cr][cc];
-        *current = 'W';
+        if (cr > -1 && cr < 10 && cc > -1 && cc < 20)
+        {
+            *current = 'W';
+        }
 
+        // down-left
         while (repeats != 0)
         {
             cr++;
             cc--;
             current = &grid[cr][cc];
-            *current = 'W';
+            if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+            {
+                break;
+            }
+            if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
+            {
+                *current = 'W';
+            }
             repeats--;
+        }
+        if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+        {
+            break;
         }
 
         repeats = count;
 
+        //down-right
         while (repeats != 0)
         {
             cr++;
             cc++;
             current = &grid[cr][cc];
-            *current = 'W';
+            if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+            {
+                break;
+            }
+            if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
+            {
+                *current = 'W';
+            }
             repeats--;
+        }
+        if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+        {
+            break;
         }
 
         repeats = count;
 
+        //up-right
         while (repeats != 0)
         {
             cr--;
             cc++;
             current = &grid[cr][cc];
-            *current = 'W';
+            if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+            {
+                break;
+            }
+            if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
+            {
+                *current = 'W';
+            }
             repeats--;
+        }
+        if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+        {
+            break;
         }
 
         repeats = count;
 
+        //up-left
         while (repeats != 0)
         {
             cr--;
             cc--;
             current = &grid[cr][cc];
-            *current = 'W';
+            if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+            {
+                break;
+            }
+            if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
+            {
+                *current = 'W';
+            }
             repeats--;
+        }
+        if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
+        {
+            break;
         }
 
         count++;
-        
+        repeats = count;
+
         print_grid(grid);
         system("PAUSE");
     }
