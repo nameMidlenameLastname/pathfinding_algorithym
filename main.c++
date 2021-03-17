@@ -181,9 +181,6 @@ void walk_area(char grid[10][20])
 
         count++;
         repeats = count;
-
-        print_grid(grid);
-        system("PAUSE");
     }
 }
 int main()
