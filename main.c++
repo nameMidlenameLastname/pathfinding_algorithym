@@ -6,7 +6,7 @@ using namespace std;
 const int Y = 10;
 const int X = 20;
 
-int sr, sc, er, ec;
+int sr, sc, er, ec, enr, enc;
 
 char grid[10][20];
 
@@ -71,8 +71,8 @@ void set_grid(char grid[10][20])
     } while (sr == er && sc == ec);
 }
 
-// encontrar o ponto final e definir uma area que se possa andar
-void walk_area(char grid[10][20])
+// encontra o ponto final
+void find_end(char grid[10][20])
 {
     int cr = sr, cc = sc;
     char *current = &grid[cr][cc];
@@ -86,6 +86,7 @@ void walk_area(char grid[10][20])
         current = &grid[cr][cc];
         if (cr > -1 && cr < 10 && cc > -1 && cc < 20)
         {
+
             *current = 'W';
         }
 
@@ -97,6 +98,8 @@ void walk_area(char grid[10][20])
             current = &grid[cr][cc];
             if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
             {
+                enr = cr;
+                enc = cc;
                 break;
             }
             if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
@@ -107,6 +110,8 @@ void walk_area(char grid[10][20])
         }
         if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
         {
+            enr = cr;
+            enc = cc;
             break;
         }
 
@@ -120,6 +125,8 @@ void walk_area(char grid[10][20])
             current = &grid[cr][cc];
             if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
             {
+                enr = cr;
+                enc = cc;
                 break;
             }
             if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
@@ -130,6 +137,8 @@ void walk_area(char grid[10][20])
         }
         if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
         {
+            enr = cr;
+            enc = cc;
             break;
         }
 
@@ -143,6 +152,8 @@ void walk_area(char grid[10][20])
             current = &grid[cr][cc];
             if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
             {
+                enr = cr;
+                enc = cc;
                 break;
             }
             if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
@@ -153,6 +164,8 @@ void walk_area(char grid[10][20])
         }
         if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
         {
+            enr = cr;
+            enc = cc;
             break;
         }
 
@@ -166,6 +179,8 @@ void walk_area(char grid[10][20])
             current = &grid[cr][cc];
             if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
             {
+                enr = cr;
+                enc = cc;
                 break;
             }
             if (cr > -1 && cr < 10 && cc > -1 && cc < 20 && *current != 'E' && *current != 'S')
@@ -176,6 +191,8 @@ void walk_area(char grid[10][20])
         }
         if (*current == 'E' && cr > -1 && cr < 10 && cc > -1 && cc < 20)
         {
+            enr = cr;
+            enc = cc;
             break;
         }
 
@@ -183,11 +200,59 @@ void walk_area(char grid[10][20])
         repeats = count;
     }
 }
+void find_path(char grid[10][20])
+{
+    int cr = sr, cc = sc;
+    char *current = &grid[cr][cc];
+    char *end_point = &grid[enr][enc];
+
+    while (current != end_point)
+    {
+        if (enr - (cr - 1) < enr - (cr + 1) && cr != enr)
+        {
+            cr--;
+            current = &grid[cr][cc];
+            if (*current != 'E')
+            {
+                *current = 'z';
+            }
+        }
+        if (enr - (cr + 1) < enr - (cr - 1) && cr != enr)
+        {
+            cr++;
+            current = &grid[cr][cc];
+            if (*current != 'E')
+            {
+                *current = 'z';
+            }
+        }
+        if (enc - (cc - 1) < enc - (cc + 1) && cc != enc)
+        {
+            cc--;
+            current = &grid[cr][cc];
+            if (*current != 'E')
+            {
+                *current = 'z';
+            }
+        }
+        if (enc - (cc + 1) < enc - (cc - 1) && cc != enc)
+        {
+            cc++;
+            current = &grid[cr][cc];
+            if (*current != 'E')
+            {
+                *current = 'z';
+            }
+        }
+    }
+}
+
 int main()
 {
     system("cls");
     fill_grid(grid);
     set_grid(grid);
-    walk_area(grid);
+    find_end(grid);
+    find_path(grid);
     print_grid(grid);
 }
